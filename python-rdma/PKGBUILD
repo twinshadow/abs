@@ -1,0 +1,23 @@
+pkgname="python-rdma"
+pkgdesc="A Python API for the Linux RDMA stack."
+pkgver=1
+pkgrel=1
+arch=('i686' 'x86_64')
+url="http://www.obsidianresearch.com/products/software/python-rdma/index.html"
+license=('GPL2')
+depends=('python2' 'libibverbs')
+optdepends=('pyrex')
+
+build () {
+  cd "${srcdir}"
+  rm -rf "${pkgname}"
+  git clone --depth 1 "https://github.com/jgunthorpe/${pkgname}.git"
+  rm -rf "${pkgname}/.git"
+  cd "${pkgname}"
+  python2 setup.py build
+}
+
+package () {
+  cd "${srcdir}/${pkgname}"
+  python2 setup.py install --prefix "${pkgdir}/usr"
+}
