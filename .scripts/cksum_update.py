@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import os
 cksums = os.popen("makepkg -g").read().splitlines()
 fd = open("PKGBUILD")
