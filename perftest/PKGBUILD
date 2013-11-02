@@ -1,0 +1,36 @@
+# Maintainer: Anthony Cornehl <accornehl[at]gmail[dot]com>
+# https://github.com/twinshadow/abs
+pkgname=perftest
+pkgver=2.0
+_subver=0.50
+_commit=g2991066
+pkgrel=3
+pkgdesc="InfiniBand performance tests"
+groups=('ofed')
+url="http://www.openfabrics.org"
+arch=('x86_64' 'i686')
+license=('GPL2' 'custom:"Open Fabrics Alliance BSD"')
+depends=('bash' 'libibumad' 'librdmacm')
+source=("http://www.openfabrics.org/downloads/${pkgname}/${pkgname}-${pkgver}-${_subver}.${_commit}.tar.gz")
+# cksum start
+md5sums=('7281b148c041d8c49fb97e84a41c6a27')
+sha512sums=('a46e2d60230087143da2ab83c75f146d867f01a7179b094436dc94032f64fe0844529b0955ed57f179bcbd9c06c6ce98555fc0615adb64961bb812813c8326a4')
+# cksum end
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix=/usr \
+              --mandir=/usr/share/man \
+              --sysconfdir=/etc \
+              --localstatedir=/var
+  make
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  mkdir -p "${pkgdir}/usr/bin"
+  install -Dm755 ib_* "${pkgdir}/usr/bin"
+  install -Dm755 runme "${pkgdir}/usr/share/${pkgname}/runme"
+  install -Dm644 README "${pkgdir}/usr/share/${pkgname}/README"
+  install -Dm644 COPYING "${pkgdir}/usr/share/licenses/${pkgname}/COPYING"
+}

@@ -1,0 +1,35 @@
+# Maintainer: Anthony Cornehl <accornehl[at]gmail[dot]com>
+# https://github.com/twinshadow/abs
+pkgname=dapl
+pkgver=2.0.37
+pkgrel=1
+pkgdesc="Userspace access to RDMA devices using OS Agnostic DAT APIs"
+groups=('ofed')
+url="http://www.openfabrics.org"
+arch=('x86_64' 'i686')
+license=('GPL2' 'custom:"Open Fabrics Alliance BSD"')
+depends=('librdmacm')
+source=("http://www.openfabrics.org/downloads/dapl/${pkgname}-${pkgver}.tar.gz"
+        "dat_strerror.patch")
+# cksum start
+md5sums=('2e185e1aac2c09b3d9e529ee1aa1669e'
+         '78405bf318c0b445d62423055434a85b')
+sha512sums=('2dde2c8f617a28da9e01421022ad3c5a63908061f61f35eb746cd194ed00cb804878cf24a1998f62445054a80d3874ad3697c443cf321936901bd72f86c06036'
+            '7119838e76a4022535af5329347d1b979eab7960cb9bf74bf5f85a5cd67a32fa78a7b43f34bdc594ea7ef4d38233104785614dd455dc6bdbce22426470e2bb84')
+# cksum end
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix=/usr \
+              --mandir=/usr/share/man \
+              --sysconfdir=/etc \
+              --localstatedir=/var
+  patch -p1 < ../../dat_strerror.patch
+  make
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make -j1 DESTDIR="${pkgdir}" install
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}
