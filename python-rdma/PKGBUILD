@@ -1,23 +1,33 @@
-pkgname="python-rdma"
-pkgdesc="A Python API for the Linux RDMA stack."
+# Maintainer: Anthony Cornehl <accornehl[at]gmail[dot]com>
+# https://github.com/twinshadow/abs
+pkgname="python2-rdma"
+pkgdesc="A Python API for the Linux InfiniBand RDMA stack."
 pkgver=1
-pkgrel=1
-arch=('i686' 'x86_64')
+pkgrel=2
+arch=("any")
 url="http://www.obsidianresearch.com/products/software/python-rdma/index.html"
 license=('GPL2')
 depends=('python2' 'libibverbs')
-optdepends=('pyrex')
+optdepends=('python2-pyrex')
+makedepends=(
+    "python2-setuptools"
+    "git"
+)
+source=("$pkgname"::"git+https://github.com/jgunthorpe/${pkgname}.git")
+md5sums=("SKIP")
+
+pkgver() {
+  cd "$pkgname"
+  local ver="$(git describe --long)"
+  printf "%s" "${ver//-/.}"
+}
 
 build () {
-  cd "${srcdir}"
-  rm -rf "${pkgname}"
-  git clone --depth 1 "https://github.com/jgunthorpe/${pkgname}.git"
-  rm -rf "${pkgname}/.git"
-  cd "${pkgname}"
+  cd "$pkgname"
   python2 setup.py build
 }
 
 package () {
-  cd "${srcdir}/${pkgname}"
-  python2 setup.py install --prefix "${pkgdir}/usr"
+  cd "$pkgname"
+  python2 setup.py install --root="$pkgdir" --optimize=1
 }
