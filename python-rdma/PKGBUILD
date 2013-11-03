@@ -1,6 +1,7 @@
 # Maintainer: Anthony Cornehl <accornehl[at]gmail[dot]com>
 # https://github.com/twinshadow/abs
 pkgname="python2-rdma"
+_reponame="python-rdma"
 pkgdesc="A Python API for the Linux InfiniBand RDMA stack."
 pkgver=1
 pkgrel=2
@@ -13,7 +14,7 @@ makedepends=(
     "python2-setuptools"
     "git"
 )
-source=("$pkgname"::"git+https://github.com/jgunthorpe/${pkgname}.git")
+source=("$pkgname"::"git+https://github.com/jgunthorpe/${_reponame}.git")
 md5sums=("SKIP")
 
 pkgver() {
