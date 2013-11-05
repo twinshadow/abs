@@ -1,20 +1,21 @@
 # Maintainer: Anthony Cornehl <accornehl[at]gmail[dot]com>
 # https://github.com/twinshadow/abs
 pkgname=mft
-pkgver=2.7.1
-_pkgrev=a-1
-_mftver=7
-pkgrel=2
+pkgver=3.1.0
+_pkgrev=-8
+_mftver=8
+pkgrel=1
 pkgdesc="Mellanox firmware tools"
 url="http://www.mellanox.com/"
 arch=('x86_64' 'i686')
 license=('custom:"Mellanox Proprietary License"')
 depends=('gcc-libs' 'bash' 'tcl' 'linux-headers')
 makedepends=('rpmextract')
+# http://www.mellanox.com/page/management_tools
 source=("http://www.mellanox.com/downloads/MFT/${pkgname}-${pkgver}${_pkgrev}.tgz")
 # cksum start
-md5sums=('f01bd689f4ac3168d3df7be5c63eda3e')
-sha512sums=('3bf6dfb192f130c9941e8ef44811fd4eaacac1565451edcf4ac02261e7295021274e99e98493f73294bc84092f74ca428b5336546e27a4be0b39db5e8d01fde9')
+md5sums=('7f042be57c874e14c5b09db22df7344f')
+sha512sums=('2dd729c93b957d980ad4e14886b6cf887f95761237f8cd1d10a704d36f6ad4a349db194278e9bef3459521c7e12aa2b7b4b2a6ca8f334f7bf1f0aa81a24e7a9f')
 # cksum end
 
 build() {
