@@ -47,6 +47,6 @@ package() {
   install -Dm644 LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 
   rm -rf "${pkgdir}/usr/lib/mft" "${pkgdir}/usr/lib64/mft" "${pkgdir}/usr/bin/mst"
-  mv "${pkgdir}/etc/init.d" "${pkgdir}/etc/rc.d"
-  ln -s "/etc/rc.d/mst" "${pkgdir}/usr/bin/mst"
+  mv "${pkgdir}/etc/init.d/mst" "${pkgdir}/usr/bin"
+  rmdir "${pkgdir}/etc/init.d"
 }

@@ -1,0 +1,25 @@
+--- a/src/linux-3.11.6-1-ARCH/arch/x86/include/asm/compat.h	2013-09-02 13:46:10.000000000 -0700
++++ b/src/linux-3.11.6-1-ARCH/arch/x86/include/asm/compat.h	2013-11-05 13:31:57.129020804 -0800
+@@ -293,6 +293,7 @@
+ 	return (u32)(unsigned long)uptr;
+ }
+ 
++#ifdef CONFIG_X86_64
+ static inline void __user *arch_compat_alloc_user_space(long len)
+ {
+ 	compat_uptr_t sp;
+@@ -306,6 +307,14 @@
+ 
+ 	return (void __user *)round_down(sp - len, 16);
+ }
++#else
++static inline void __user *arch_compat_alloc_user_space(long len)
++{
++	compat_uptr_t sp;
++  sp = task_pt_regs(current)->sp;
++	return (void __user *)round_down(sp - len, 16);
++}
++#endif
+ 
+ static inline bool is_x32_task(void)
+ {
