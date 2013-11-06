@@ -1,6 +1,8 @@
 # $Id: PKGBUILD 198776 2013-11-04 11:13:06Z tpowa $
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
+# Maintainer: Anthony Cornehl <accornehl[at]gmail[dot]com>
+# https://github.com/twinshadow/abs
 
 pkgbase=linux-infiniband       # Build kernel with a different name
 _srcname=linux-3.12
