@@ -9,7 +9,7 @@ pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
-makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc')
+makedepends=('kmod' 'inetutils' 'bc')
 options=('!strip')
 source=("http://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz"
         #"http://www.kernel.org/pub/linux/kernel/v3.x/patch-${pkgver}.xz"
@@ -324,7 +324,7 @@ _package-docs() {
   rm -f "${pkgdir}/usr/src/linux-${_kernver}/Documentation/DocBook/Makefile"
 }
 
-pkgname=("${pkgbase}" "${pkgbase}-headers" "${pkgbase}-docs")
+pkgname=("${pkgbase}")
 for _p in ${pkgname[@]}; do
   eval "package_${_p}() {
     _package${_p#${pkgbase}}
