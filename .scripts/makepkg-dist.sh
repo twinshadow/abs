@@ -1,15 +1,15 @@
 #!/bin/bash
 PROJECT="$1"
-MAKEPKG=${MAKEPKG:-makepkg}
+MAKEPKG=${MAKEPKG:-/usr/bin/makepkg}
 CPUARCH="$(lscpu | sed -n 's/Architecture:\s\+\(.*\)/\1/p')"
 SCRIPTS="$PWD/.scripts"
+NAMCAP="/usr/bin/namcap"
 
-export PACKAGER="Anthony Cornehl <accornehl[at]gmail[dot]com>"
+export PACKAGER
 export MAKEFLAGS="-j$(grep -c processor /proc/cpuinfo)"
-export PACMAN=${PACMAN:-pacaur}
-export PKGDEST="$PWD/.pkgdir"
+export PACMAN=${PACMAN:-/usr/bin/pacaur}
+export PKGDEST="${PKGDEST:-.pkgdir}"
 export SRCPKGDEST="$PKGDEST"
-mkdir -p "$PKGDEST"
 
 test -d ".git" || {
     echo "This script needs to be run from the repository root directory.";
@@ -21,7 +21,9 @@ test -d "$PROJECT" || {
     exit 1;
 }
 
+mkdir -p "$PKGDEST"
 cd "$PROJECT"
-"$MAKEPKG" --syncdeps --noconfirm --noprogressbar --clean --force
+"$MAKEPKG" --syncdeps --noconfirm --noprogressbar --clean --force || exit $?
+"$NAMCAP" "$PKGDEST"/*.pkg.tar.xz
 "$MAKEPKG" --source --force
 cd -
