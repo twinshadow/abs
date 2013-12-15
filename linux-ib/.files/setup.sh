@@ -32,4 +32,5 @@ MD5SRC="$(makepkg -g)"
 test "$?" = 0 || exit 1;
 MD5SRC="$(echo $MD5SRC | tr '\n' '\t')"
 sed -i -e '/md5sums=(/,/)/d' -e "/source=(/,/^$/!b;/^$/i\\$(echo $MD5SRC)" PKGBUILD-tmp
-cat PKGBUILD-tmp | tr '\t' '\n' > PKGBUILD
+sed -i -e '/md5sums/s/\ /\n         /g' PKGBUILD-tmp
+cp PKGBUILD-tmp PKGBUILD
