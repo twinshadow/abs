@@ -31,6 +31,6 @@ patch < .files/infiniband-config.x86_64.patch || exit 1
 MD5SRC="$(makepkg -g)"
 test "$?" = 0 || exit 1;
 MD5SRC="$(echo $MD5SRC | tr '\n' '\t')"
-sed -i -e '/md5sums=(/,/)/d' -e "/source=(/,/^$/!b;/^$/i\\$(echo $MD5SRC)" PKGBUILD-tmp
-sed -i -e '/md5sums/s/\ /\n         /g' PKGBUILD-tmp
+sed -i -e '/^md5sums=(/,/)/d' -e "/source=(/,/^$/!b;/^$/i\\$(echo $MD5SRC)" PKGBUILD-tmp
+sed -i -e '/^md5sums=(/s/\ /\n         /g' PKGBUILD-tmp
 cp PKGBUILD-tmp PKGBUILD

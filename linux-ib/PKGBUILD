@@ -31,9 +31,7 @@ md5sums=('cc6ee608854e0da4b64f6c1ff8b6398c'
 
 _kernelname=${pkgbase#linux}
 
-#
-         module.symbols
-         md5sums
+# module.symbols md5sums
 # x86_64
 # 2fd43e3edc671c61e043a5c0b3b2a1f0  /lib/modules/3.12.0-1-ARCH/modules.symbols
 # i686
