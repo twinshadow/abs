@@ -14,13 +14,17 @@ fi
 cp .svnpkg/* .
 
 cp PKGBUILD PKGBUILD-tmp
-sed -i -e '/^pkgbase/d;'                                                \
-       -e 's/^#\(pkgbase=linux\)-custom/\1-infiniband/g;'               \
-       -e "/^makedepends=/s/\('xmlto'\|'docbook-xsl'\)\s*//g"           \
-       -e 's/^\(\s*pkgdesc.*modules\)"$/\1 with InfiniBand drivers"/g;' \
-       -e '/_package-\(docs\|headers\)() {/,/^}/D'                      \
-       -e 's|${pkgbase/linux/Linux}|Linux|'                             \
-       -e 's/^pkgname=.*/pkgname=("${pkgbase}")/' PKGBUILD-tmp
+sed -i -e '/^pkgbase/d;'                                          \
+       -e 's/^#\(pkgbase=linux\)-custom/\1-infiniband/g;'         \
+       -e "/^makedepends=/s/\('xmlto'\|'docbook-xsl'\)\s*//g"     \
+       -e 's/^\(\s*pkgdesc.*modules\)"$/\1 with InfiniBand drivers and headers"/g;' \
+       -e '/_package-docs() {/,/^}/D'                             \
+       -e '/_package() {/,/^}/s/^}/  # linux-infinband-headers/'  \
+       -e '/_package-headers() {/,/^$/D'                          \
+       -e 's|${pkgbase/linux/Linux}|Linux|'                       \
+       -e 's/^pkgname=.*/pkgname=(${pkgbase})/'                   \
+       -e '/  \(provides\|depends\|replaces\|\)=("kernel26/D'     \
+       PKGBUILD-tmp
 
 sed -i -e '/# Maintainer:/,/^$/!b;/^$/i\# Maintainer: Anthony Cornehl <accornehl[at]gmail[dot]com>\
 # https://github.com/twinshadow/abs' PKGBUILD-tmp
