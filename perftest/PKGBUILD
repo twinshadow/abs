@@ -2,8 +2,8 @@
 # https://github.com/twinshadow/abs
 pkgname=perftest
 pkgver=2.0
-_subver=0.50
-_commit=g2991066
+_subver=0.75
+_commit=g636d19b
 pkgrel=3
 pkgdesc="InfiniBand performance tests"
 groups=('ofed')

@@ -1,7 +1,7 @@
 # Maintainer: Anthony Cornehl <accornehl[at]gmail[dot]com>
 # https://github.com/twinshadow/abs
 pkgname=infiniband-diags
-pkgver=1.6.2
+pkgver=1.6.4
 pkgrel=1
 pkgdesc="OpenFabrics Alliance InfiniBand diagnostic tools"
 groups=('ofed')
