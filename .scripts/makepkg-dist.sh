@@ -12,17 +12,12 @@ SRCEXT='.src.tar.gz'
 export PACMAN=${PACMAN:-/usr/bin/pacaur}
 export MAKEFLAGS="-j$(grep -c processor /proc/cpuinfo)"
 
-test -d ".git" || {
-    echo "This script needs to be run from the repository root directory.";
-    exit 1;
-}
+source .scripts/run_from_gitdir.sh
+source .scripts/project_exists.sh
+project_exists "$PROJECT" || exit $?
+PKGBUILD="$PROJECT/PKGBUILD"
 
-test -d "$PROJECT" || {
-    echo "The given project does not exist: $PROJECT";
-    exit 1;
-}
-
-for dep in $(bash -c "source $PROJECT/PKGBUILD; echo \${depends[*]}"); do
+for dep in $(bash -c "source '$PKGBUILD'; echo \${depends[*]}"); do
     if [ -d "$dep" ] && [ "$PACMAN -T $dep" ]; then
         $SCRIPTS/makepkg-dist.sh $dep install
     fi

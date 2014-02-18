@@ -1,6 +1,11 @@
 #!/bin/bash
 
-source "$1/PKGBUILD"
+PROJECT="$1"
+
+source .scripts/project_exists.sh || { echo "scripts not found"; exit 1; }
+project_exists "$PROJECT" || exit $?
+
+source "$PROJECT/PKGBUILD"
 
 for str in \
   pkgname  \
