@@ -2,7 +2,7 @@
 # https://github.com/twinshadow/abs
 pkgname=qperf
 pkgver=0.4.9
-pkgrel=1
+pkgrel=2
 pkgdesc="RDMA and IP performance tests"
 groups=('ofed')
 url="http://www.openfabrics.org"
@@ -10,7 +10,7 @@ arch=('x86_64' 'i686')
 license=('GPL2' 'custom:"Open Fabrics Alliance BSD"')
 # To disable RDMA, remove the following line
 depends=("libibverbs" "librdmacm")
-source=("http://www.openfabrics.org/downloads/${pkgname}/${pkgname}-${pkgver}.tar.gz")
+source=("https://www.openfabrics.org/downloads/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 # cksum start
 md5sums=('a9eea1953ee5379e57ae5fd7b09fecf2')
 sha512sums=('da22c76686b62262381f774fa107d0ec3b0695128628c55ed945c53a20f0854411e6d2b15d431a98177ce5be8332d2a1e54429d3d81c4c22f160d07e992aab3c')
